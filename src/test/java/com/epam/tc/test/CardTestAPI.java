@@ -35,7 +35,7 @@ public class CardTestAPI extends BaseTestAPI {
         deleteBoard(board.id());
     }
 
-    @Test
+    @Test(priority = 1)
     protected void addNewCard() {
         expectedCardName = RandomStringUtils.random(15, true, true);
         card = given()
@@ -68,7 +68,7 @@ public class CardTestAPI extends BaseTestAPI {
             .extract().body().as(CardEntity.class);
     }
 
-    @Test
+    @Test(priority = 2)
     protected void editCard() {
         expectedCardName = RandomStringUtils.random(15, true, true);
         var cardNew = CardEntity.builder().name(expectedCardName).id(card.id()).build();
@@ -85,7 +85,7 @@ public class CardTestAPI extends BaseTestAPI {
             .extract().body().as(CardEntity.class);
     }
 
-    @Test
+    @Test(priority = 3)
     protected void getInfoAboutCard() {
         card = given()
             .spec(baseRequestSpecification)
@@ -98,7 +98,7 @@ public class CardTestAPI extends BaseTestAPI {
             .extract().body().as(CardEntity.class);
     }
 
-    @Test
+    @Test(priority = 4)
     protected void deleteCard() {
         given()
             .spec(baseRequestSpecification)
