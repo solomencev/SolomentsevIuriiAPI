@@ -1,7 +1,7 @@
 package com.epam.tc.test;
 
-import static com.epam.tc.utils.PropertiesExtractor.getApiKeyFromPropertiesExtractor;
-import static com.epam.tc.utils.PropertiesExtractor.getApiTokenFromPropertiesExtractor;
+/*import static com.epam.tc.utils.PropertiesExtractor.getApiKeyFromPropertiesExtractor;
+import static com.epam.tc.utils.PropertiesExtractor.getApiTokenFromPropertiesExtractor;*/
 import static io.restassured.RestAssured.given;
 
 import com.epam.tc.entities.BoardEntity;
@@ -32,8 +32,8 @@ public class BaseTestAPI {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
         baseRequestSpecification = new RequestSpecBuilder()
-            .addQueryParam("key", getApiKeyFromPropertiesExtractor())
-            .addQueryParam("token", getApiTokenFromPropertiesExtractor())
+            .addQueryParam("key", System.getenv("key"))
+            .addQueryParam("token", System.getenv("token"))
             .setContentType(ContentType.JSON)
             .build();
 

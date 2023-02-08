@@ -81,8 +81,9 @@ public class LabelTestAPI extends BaseTestAPI {
     }
 
     public String randomAvailableColor() {
-        String[] myString = new String[]{"yellow", "purple", "blue", "red", "green", "orange", "black", "sky", "pink", "lime"};
-        int n = (int)Math.floor(Math.random() * myString.length);
+        String[] myString = new String[]{"yellow", "purple", "blue", "red", "green", "orange", "black", "sky", "pink",
+            "lime"};
+        int n = (int) Math.floor(Math.random() * myString.length);
         return myString[n];
     }
 }
