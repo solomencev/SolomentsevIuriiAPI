@@ -18,4 +18,6 @@ public class Endpoints {
 
     public static final String MEMBERS = "/members";
     public static final String MEMBER_ID = "/members/{id}";
+
+    public static final String LISTS = "/lists";
 }

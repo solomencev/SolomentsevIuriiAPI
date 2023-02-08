@@ -29,7 +29,6 @@ public class BoardTest extends BaseTestAPI {
     protected void editBoard() {
         String descForBoard = RandomStringUtils.random(100, true, true);
         var boardNew = BoardEntity.builder().desc(descForBoard).id(board.id()).build();
-
         board = given()
             .spec(baseRequestSpecification)
             .when().basePath(Endpoints.BOARD_ID)
@@ -44,7 +43,6 @@ public class BoardTest extends BaseTestAPI {
 
     @Test(priority = 3)
     protected void getInfoAboutBoard() {
-
         board = given()
             .spec(baseRequestSpecification)
             .when().basePath(Endpoints.BOARD_ID)
@@ -58,7 +56,6 @@ public class BoardTest extends BaseTestAPI {
 
     @Test(priority = 4)
     protected void deleteBoard() {
-
         given()
             .spec(baseRequestSpecification)
             .when().basePath(Endpoints.BOARD_ID)
@@ -66,8 +63,6 @@ public class BoardTest extends BaseTestAPI {
             .delete()
             .then()
             .spec(okResponse);
-
-        //assert 404
         given()
             .spec(baseRequestSpecification)
             .when().basePath(Endpoints.BOARD_ID)
@@ -75,6 +70,5 @@ public class BoardTest extends BaseTestAPI {
             .get()
             .then()
             .spec(notFoundResponse);
-
     }
 }

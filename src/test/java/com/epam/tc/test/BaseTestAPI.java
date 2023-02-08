@@ -6,6 +6,7 @@ import static io.restassured.RestAssured.given;
 
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.CardEntity;
+import com.epam.tc.entities.ListEntity;
 import com.epam.tc.utils.Endpoints;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -63,6 +64,17 @@ public class BaseTestAPI {
             .then()
             //.spec(okResponse)
             .extract().body().as(BoardEntity.class);
+    }
+
+    protected ListEntity createListOnTheBoard(String boardId, String listName) {
+        return given()
+            .spec(baseRequestSpecification)
+            .basePath(Endpoints.LISTS)
+            .queryParam("name", listName).queryParam("idBoard", boardId)
+            .when()
+            .post()
+            .then().spec(okResponse)
+            .extract().body().as(ListEntity.class);
     }
 
     protected CardEntity createCardInTheList(String idList, String cardName) {
