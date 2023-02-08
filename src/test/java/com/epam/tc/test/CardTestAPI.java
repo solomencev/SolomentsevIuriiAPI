@@ -70,7 +70,6 @@ public class CardTestAPI extends BaseTestAPI {
 
     @Test
     protected void editCard() {
-
         expectedCardName = RandomStringUtils.random(15, true, true);
         var cardNew = CardEntity.builder().name(expectedCardName).id(card.id()).build();
         card = given()
@@ -107,7 +106,6 @@ public class CardTestAPI extends BaseTestAPI {
             .delete(Endpoints.CARDS_ID)
             .then()
             .spec(okResponse);
-
         given()
             .spec(baseRequestSpecification)
             .when().basePath(Endpoints.CARDS_ID)

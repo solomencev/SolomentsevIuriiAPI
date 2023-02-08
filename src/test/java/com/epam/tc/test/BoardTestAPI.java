@@ -8,7 +8,7 @@ import com.epam.tc.utils.Endpoints;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
 
-public class BoardTest extends BaseTestAPI {
+public class BoardTestAPI extends BaseTestAPI {
 
     @Test(priority = 1)
     protected void addNewBoard() {

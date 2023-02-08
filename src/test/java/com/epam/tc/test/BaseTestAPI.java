@@ -6,7 +6,9 @@ import static io.restassured.RestAssured.given;
 
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.CardEntity;
+import com.epam.tc.entities.LabelEntity;
 import com.epam.tc.entities.ListEntity;
+import com.epam.tc.entities.MemberEntity;
 import com.epam.tc.utils.Endpoints;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -25,6 +27,7 @@ public class BaseTestAPI {
     protected ResponseSpecification okResponse;
     protected ResponseSpecification notFoundResponse;
     BoardEntity board;
+    MemberEntity member;
 
     @BeforeClass
     public void setup() {
@@ -75,6 +78,19 @@ public class BaseTestAPI {
             .post()
             .then().spec(okResponse)
             .extract().body().as(ListEntity.class);
+    }
+
+    protected LabelEntity createLabelOnTheBoard(String boardId, String labelName, String color) {
+        return given()
+            .spec(baseRequestSpecification)
+            .basePath(Endpoints.LABELS)
+            .queryParam("name", labelName)
+            .queryParam("idBoard", boardId)
+            .queryParam("color", color)
+            .when()
+            .post()
+            .then().spec(okResponse)
+            .extract().body().as(LabelEntity.class);
     }
 
     protected CardEntity createCardInTheList(String idList, String cardName) {
