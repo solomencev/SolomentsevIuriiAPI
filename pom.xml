@@ -55,4 +55,15 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>HW</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <suite.xml.file>test.xml</suite.xml.file>
+      </properties>
+    </profile>
+  </profiles>
 </project>

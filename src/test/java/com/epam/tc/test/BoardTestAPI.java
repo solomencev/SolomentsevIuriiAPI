@@ -1,74 +1,58 @@
 package com.epam.tc.test;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import com.epam.tc.entities.BoardEntity;
-import com.epam.tc.utils.Endpoints;
+import com.epam.tc.serviceobjects.Board;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
-public class BoardTestAPI extends BaseTestAPI {
+public class BoardTestAPI extends BaseTestAPI  {
 
     @Test(priority = 1)
-    protected void addNewBoard() {
-        expectedBoardName = RandomStringUtils.random(50, true, true);
-        board = given()
-            .spec(baseRequestSpecification)
-            .when()
-            .queryParam("name", expectedBoardName)
-            .basePath(Endpoints.BOARDS)
-            .post()
-            .then()
-            .body("name", equalTo(expectedBoardName))
-            .spec(okResponse)
-            .extract().body().as(BoardEntity.class);
+    public void createBoard() {
+        boardName = RandomStringUtils.random(50, true, true);
+        boardDescription = RandomStringUtils.random(50, true, true);
+        boardEntity = Board.createNewBoard(boardName, boardDescription)
+                           .then()
+                           .spec(okResponse)
+                           .body(Board.boardBodyKeyName, equalTo(boardName))
+                           .body(Board.boardBodyKeyDesc, equalTo(boardDescription))
+                           .extract().body().as(BoardEntity.class);
     }
 
     @Test(priority = 2)
-    protected void editBoard() {
-        String descForBoard = RandomStringUtils.random(100, true, true);
-        var boardNew = BoardEntity.builder().desc(descForBoard).id(board.id()).build();
-        board = given()
-            .spec(baseRequestSpecification)
-            .when().basePath(Endpoints.BOARD_ID)
-            .pathParam("id", board.id())
-            .body(boardNew)
-            .put()
-            .then()
-            .body("desc", equalTo(descForBoard))
-            .spec(okResponse)
-            .extract().body().as(BoardEntity.class);
+    public void getBoard() {
+        Board.getBoard(boardEntity.getId())
+             .then()
+             .spec(okResponse)
+             .body(Board.boardBodyKeyName, equalTo(boardName))
+             .body(Board.boardBodyKeyDesc, equalTo(boardDescription));
     }
 
     @Test(priority = 3)
-    protected void getInfoAboutBoard() {
-        board = given()
-            .spec(baseRequestSpecification)
-            .when().basePath(Endpoints.BOARD_ID)
-            .pathParam("id", board.id())
-            .get()
-            .then()
-            .spec(okResponse)
-            .body("name", equalTo(expectedBoardName))
-            .extract().body().as(BoardEntity.class);
+    public void updateNameBoard() {
+        String newBoardName = RandomStringUtils.random(100, true, true);
+        Board.updateBoard(boardEntity.getId(), newBoardName)
+             .then()
+             .spec(okResponse)
+             .body(Board.boardBodyKeyId, equalTo(boardEntity.getId()))
+             .body(Board.boardBodyKeyName, equalTo(newBoardName));
     }
 
     @Test(priority = 4)
-    protected void deleteBoard() {
-        given()
-            .spec(baseRequestSpecification)
-            .when().basePath(Endpoints.BOARD_ID)
-            .pathParam("id", board.id())
-            .delete()
-            .then()
-            .spec(okResponse);
-        given()
-            .spec(baseRequestSpecification)
-            .when().basePath(Endpoints.BOARD_ID)
-            .pathParam("id", board.id())
-            .get()
-            .then()
-            .spec(notFoundResponse);
+    public void deleteBoard() {
+        Board.deleteBoard(boardEntity.getId())
+             .then()
+             .spec(okResponse);
     }
+
+    @Test(priority = 5)
+    public void makeSureBoardDeletion() {
+        Board.getBoard(boardEntity.getId())
+             .then()
+             .statusCode(HttpStatus.SC_NOT_FOUND);
+    }
+
 }
