@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ListEntity {
+public class LabelEntity {
 
     String id;
+    String color;
     String name;
 
 }

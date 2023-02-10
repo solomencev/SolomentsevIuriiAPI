@@ -2,6 +2,7 @@ package com.epam.tc.test;
 
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.CardEntity;
+import com.epam.tc.entities.LabelEntity;
 import com.epam.tc.entities.ListEntity;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -19,6 +20,7 @@ public class BaseTestAPI  {
     protected String listName;
     protected String boardDescription;
     protected String cardName;
+    protected String labelName;
 
     public static final String BASE_ENDPOINT = "https://api.trello.com";
 
@@ -28,6 +30,7 @@ public class BaseTestAPI  {
     BoardEntity boardEntity = new BoardEntity();
     ListEntity listEntity = new ListEntity();
     CardEntity cardEntity = new CardEntity();
+    LabelEntity labelEntity = new LabelEntity();
 
     public static RequestSpecification baseRequestSpecification;
     public static ResponseSpecification okResponse;
