@@ -1,6 +1,8 @@
 package com.epam.tc.test;
 
 import com.epam.tc.entities.BoardEntity;
+import com.epam.tc.entities.CardEntity;
+import com.epam.tc.entities.ListEntity;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -14,7 +16,9 @@ import org.testng.annotations.BeforeClass;
 public class BaseTestAPI  {
 
     protected String boardName;
+    protected String listName;
     protected String boardDescription;
+    protected String cardName;
 
     public static final String BASE_ENDPOINT = "https://api.trello.com";
 
@@ -22,6 +26,8 @@ public class BaseTestAPI  {
     private String expectedHeaderContentType = "application/json; charset=utf-8";
 
     BoardEntity boardEntity = new BoardEntity();
+    ListEntity listEntity = new ListEntity();
+    CardEntity cardEntity = new CardEntity();
 
     public static RequestSpecification baseRequestSpecification;
     public static ResponseSpecification okResponse;

@@ -37,6 +37,17 @@ public class Board {
             .extract().response();
     }
 
+    public static Response createNewBoardForListFlow(String boardName) {
+        return given()
+            .spec(BaseTestAPI.baseRequestSpecification)
+            .basePath(BOARDS_PATH)
+            .when()
+            .queryParam(pathParamName, boardName)
+            .post()
+            .then()
+            .extract().response();
+    }
+
     public static Response getBoard(String boardId) {
         return given()
             .spec(BaseTestAPI.baseRequestSpecification)
