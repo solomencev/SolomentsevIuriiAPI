@@ -4,6 +4,8 @@
   <test name="Test suite" >
     <classes>
       <class name="com.epam.tc.test.BoardTestAPI" />
+      <class name="com.epam.tc.test.LabelTestAPI" />
+      <class name="com.epam.tc.test.CardTestAPI" />
     </classes>
   </test>
 </suite>
