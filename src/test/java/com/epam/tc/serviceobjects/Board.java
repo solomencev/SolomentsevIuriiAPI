@@ -7,20 +7,20 @@ import io.restassured.response.Response;
 
 public class Board {
 
-    /** path */
+    /** Path. */
     private static final String BOARDS_PATH = "/1/boards";
     private static final String BOARD_ID = "/1/boards/{id}";
 
-    /** path parameters */
+    /** Path parameters. */
     public static String pathParamId = "id";
     public static String pathParamName = "name";
     public static String pathParamDescription = "desc";
 
-    /** query parameters */
+    /** Query parameters. */
     public static String queryParamName = "name";
 
 
-    /** board body keys */
+    /** Board body keys. */
     public static String boardBodyKeyId = "id";
     public static String boardBodyKeyName = "name";
     public static String boardBodyKeyDesc = "desc";

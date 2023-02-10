@@ -7,19 +7,19 @@ import io.restassured.response.Response;
 
 public class Label {
 
-    /** path */
+    /** Path. */
     private static final String LABELS_PATH = "/1/labels";
     private static final String LABEL_ID = "/1/labels/{id}";
 
-    /** path parameters */
+    /** Path parameters. */
     private static String pathParamId = "id";
 
-    /** query parameters */
+    /** Query parameters. */
     private static String queryParamName = "name";
     private static String queryParamIdBoard = "idBoard";
     private static String queryParamColor = "color";
 
-    /** card body keys */
+    /** Card body keys. */
     public static String labelBodyKeyId = "id";
     public static String labelBodyKeyName = "name";
 

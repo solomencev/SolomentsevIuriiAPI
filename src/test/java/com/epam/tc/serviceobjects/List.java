@@ -6,13 +6,13 @@ import com.epam.tc.test.BaseTestAPI;
 import io.restassured.response.Response;
 
 public class List {
-    /** path */
+    /** Path. */
     private static final String LISTS_PATH = "/1/lists";
 
-    /** path parameters */
+    /** Path parameters. */
     private static String pathParamId = "id";
 
-    /** query parameters */
+    /** Query parameters. */
     private static String queryParamName = "name";
     private static String queryParamIdBoard = "idBoard";
 

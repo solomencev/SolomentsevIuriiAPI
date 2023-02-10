@@ -7,18 +7,18 @@ import io.restassured.response.Response;
 
 public class Card {
 
-    /** path */
+    /** Path. */
     private static final String CARDS_PATH = "/1/cards";
     private static final String CARD_ID = "/1/cards/{id}";
 
-    /** path parameters */
+    /** Path parameters. */
     private static String pathParamId = "id";
 
-    /** query parameters */
+    /** Query parameters. */
     private static String queryParamName = "name";
     private static String queryParamIdList = "idList";
 
-    /** card body keys */
+    /** Card body keys. */
     public static String cardBodyKeyId = "id";
     public static String cardBodyKeyName = "name";
     public static String cardBodyKeyIdBoard = "idBoard";
