@@ -21,6 +21,7 @@ public class BaseTestAPI  {
     protected String boardDescription;
     protected String cardName;
     protected String labelName;
+    protected String labelColor;
 
     public static final String BASE_ENDPOINT = "https://api.trello.com";
 

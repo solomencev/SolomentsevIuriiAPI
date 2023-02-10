@@ -17,21 +17,20 @@ public class Label {
     /** query parameters */
     private static String queryParamName = "name";
     private static String queryParamIdBoard = "idBoard";
-    private static String queryParamIdLabel = "idList";
+    private static String queryParamColor = "color";
 
     /** card body keys */
     public static String labelBodyKeyId = "id";
     public static String labelBodyKeyName = "name";
-    public static String labelBodyKeyIdBoard = "idBoard";
-    public static String labelBodyKeyIdList = "idList";
 
-    public static Response createLabel(String labelName, String boardId) {
+    public static Response createLabel(String labelName, String boardId, String color) {
         return given()
             .spec(BaseTestAPI.baseRequestSpecification)
             .when()
             .basePath(LABELS_PATH)
             .queryParam(queryParamName, labelName)
             .queryParam(queryParamIdBoard, boardId)
+            .queryParam(queryParamColor, color)
             .post()
             .then()
             .extract().response();
@@ -56,6 +55,17 @@ public class Label {
             .pathParam(pathParamId, labelId)
             .queryParam(queryParamName, newLabelName)
             .put()
+            .then()
+            .extract().response();
+    }
+
+    public static Response deleteLabel(String labelId) {
+        return given()
+            .spec(BaseTestAPI.baseRequestSpecification)
+            .when()
+            .basePath(LABEL_ID)
+            .pathParam(pathParamId, labelId)
+            .delete()
             .then()
             .extract().response();
     }
