@@ -2,6 +2,11 @@
 
 <suite name="Test suite" verbose="1" >
   <test name="Test suite" >
+    <groups>
+      <run>
+        <include name="HW"/>
+      </run>
+    </groups>
     <classes>
       <class name="com.epam.tc.test.BoardTestAPI" />
       <class name="com.epam.tc.test.LabelTestAPI" />
