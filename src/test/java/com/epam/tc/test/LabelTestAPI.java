@@ -31,7 +31,7 @@ public class LabelTestAPI  extends BaseTestAPI {
              .spec(okResponse);
     }
 
-    @Test
+    @Test(groups = {"HW"})
     public void labelLifecycle() {
 
         /* get label */

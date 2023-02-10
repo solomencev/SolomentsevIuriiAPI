@@ -33,7 +33,7 @@ public class CardTestAPI extends BaseTestAPI  {
              .spec(okResponse);
     }
 
-    @Test
+    @Test(groups = {"HW"})
     public void cardLifecycle() {
 
         /* add new card */

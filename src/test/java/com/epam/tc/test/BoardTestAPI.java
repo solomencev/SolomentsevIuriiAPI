@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class BoardTestAPI extends BaseTestAPI  {
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = {"HW"})
     public void createBoard() {
         boardName = RandomStringUtils.random(50, true, true);
         boardDescription = RandomStringUtils.random(50, true, true);
@@ -22,7 +22,7 @@ public class BoardTestAPI extends BaseTestAPI  {
                            .extract().body().as(BoardEntity.class);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, groups = {"HW"})
     public void getBoard() {
         Board.getBoard(boardEntity.getId())
              .then()
@@ -31,7 +31,7 @@ public class BoardTestAPI extends BaseTestAPI  {
              .body(Board.boardBodyKeyDesc, equalTo(boardDescription));
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, groups = {"HW"})
     public void updateNameBoard() {
         String newBoardName = RandomStringUtils.random(100, true, true);
         Board.updateBoard(boardEntity.getId(), newBoardName)
@@ -41,14 +41,14 @@ public class BoardTestAPI extends BaseTestAPI  {
              .body(Board.boardBodyKeyName, equalTo(newBoardName));
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = {"HW"})
     public void deleteBoard() {
         Board.deleteBoard(boardEntity.getId())
              .then()
              .spec(okResponse);
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5, groups = {"HW"})
     public void makeSureBoardDeletion() {
         Board.getBoard(boardEntity.getId())
              .then()
