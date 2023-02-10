@@ -3,8 +3,10 @@ package com.epam.tc.test;
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.LabelEntity;
 import com.epam.tc.serviceobjects.Board;
+import com.epam.tc.serviceobjects.Card;
 import com.epam.tc.serviceobjects.Label;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hamcrest.core.IsEqual;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -27,7 +29,21 @@ public class LabelTestAPI  extends BaseTestAPI {
     }*/
 
     @Test
-    public void Test() {
+    public void labelLifecycle() {
+
+        /* get label */
+        Label.getLabel(labelEntity.getId())
+            .then()
+            .spec(okResponse)
+            .body(Label.labelBodyKeyName, IsEqual.equalTo(labelName));
+
+        /* update name of created label */
+        String newLabelName = RandomStringUtils.random(100, true, true);
+        Label.updateLabel(labelEntity.getId(), newLabelName)
+            .then()
+            .spec(okResponse)
+            .body(Label.labelBodyKeyId, IsEqual.equalTo(labelEntity.getId()))
+            .body(Label.labelBodyKeyName, IsEqual.equalTo(newLabelName));
 
     }
 

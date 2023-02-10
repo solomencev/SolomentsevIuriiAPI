@@ -36,4 +36,27 @@ public class Label {
             .then()
             .extract().response();
     }
+
+    public static Response getLabel(String labelId) {
+        return given()
+            .spec(BaseTestAPI.baseRequestSpecification)
+            .when()
+            .basePath(LABEL_ID)
+            .pathParam(pathParamId, labelId)
+            .get()
+            .then()
+            .extract().response();
+    }
+
+    public static Response updateLabel(String labelId, String newLabelName) {
+        return given()
+            .spec(BaseTestAPI.baseRequestSpecification)
+            .when()
+            .basePath(LABEL_ID)
+            .pathParam(pathParamId, labelId)
+            .queryParam(queryParamName, newLabelName)
+            .put()
+            .then()
+            .extract().response();
+    }
 }
