@@ -1,5 +1,6 @@
-package com.epam.tc.test.spec;
+package com.epam.tc.spec;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -12,11 +13,14 @@ public class Specification {
     private static String headerNameContentType = "Content-Type";
     private static String expectedHeaderContentType = "application/json; charset=utf-8";
 
-    public static RequestSpecification baseRequestSpecification;
-    protected static ResponseSpecification okResponse;
+    public static final String BASE_ENDPOINT = "https://api.trello.com";
 
-    public static RequestSpecification setUpRequest() {
+    public static RequestSpecification baseRequestSpecification = setUpRequest();
+    public static ResponseSpecification okResponse = setUpResponse();
+
+    private static RequestSpecification setUpRequest() {
         baseRequestSpecification = new RequestSpecBuilder()
+            .setBaseUri(BASE_ENDPOINT)
             .addQueryParam("key", System.getenv("key"))
             .addQueryParam("token", System.getenv("token"))
             .setContentType(ContentType.JSON)
@@ -24,7 +28,7 @@ public class Specification {
         return baseRequestSpecification;
     }
 
-    public static ResponseSpecification setUpResponse() {
+    private static ResponseSpecification setUpResponse() {
         okResponse = new ResponseSpecBuilder()
             .expectContentType(ContentType.JSON)
             .expectStatusCode(HttpStatus.SC_OK)
@@ -32,10 +36,4 @@ public class Specification {
             .build();
         return okResponse;
     }
-
-    public static void teardownSpec() {
-        baseRequestSpecification = null;
-        okResponse = null;
-    }
 }
-

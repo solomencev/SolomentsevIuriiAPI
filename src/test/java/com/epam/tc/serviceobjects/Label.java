@@ -2,7 +2,7 @@ package com.epam.tc.serviceobjects;
 
 import static io.restassured.RestAssured.given;
 
-import com.epam.tc.test.BaseTestAPI;
+import com.epam.tc.spec.Specification;
 import io.restassured.response.Response;
 
 public class Label {
@@ -25,7 +25,7 @@ public class Label {
 
     public static Response createLabel(String labelName, String boardId, String color) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(LABELS_PATH)
             .queryParam(queryParamName, labelName)
@@ -38,7 +38,7 @@ public class Label {
 
     public static Response getLabel(String labelId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(LABEL_ID)
             .pathParam(pathParamId, labelId)
@@ -49,7 +49,7 @@ public class Label {
 
     public static Response updateLabel(String labelId, String newLabelName) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(LABEL_ID)
             .pathParam(pathParamId, labelId)
@@ -61,7 +61,7 @@ public class Label {
 
     public static Response deleteLabel(String labelId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(LABEL_ID)
             .pathParam(pathParamId, labelId)

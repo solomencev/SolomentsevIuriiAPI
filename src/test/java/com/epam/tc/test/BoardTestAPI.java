@@ -1,17 +1,21 @@
 package com.epam.tc.test;
 
+import static com.epam.tc.spec.Specification.okResponse;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.serviceobjects.Board;
-import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
-public class BoardTestAPI extends BaseTestAPI  {
+public class BoardTestAPI {
 
-    @Test(priority = 1, groups = {"HW"})
+    protected String boardName;
+    protected String boardDescription;
+    BoardEntity boardEntity;
+
+    @Test(priority = 1)
     public void createBoard() {
         boardName = RandomStringUtils.random(50, true, true);
         boardDescription = RandomStringUtils.random(50, true, true);
@@ -23,7 +27,7 @@ public class BoardTestAPI extends BaseTestAPI  {
                            .extract().body().as(BoardEntity.class);
     }
 
-    @Test(priority = 2, groups = {"HW"})
+    @Test(priority = 2)
     public void getBoard() {
         Board.getBoard(boardEntity.getId())
              .then()
@@ -32,7 +36,7 @@ public class BoardTestAPI extends BaseTestAPI  {
              .body(Board.boardBodyKeyDesc, equalTo(boardDescription));
     }
 
-    @Test(priority = 3, groups = {"HW"})
+    @Test(priority = 3)
     public void updateNameBoard() {
         String newBoardName = RandomStringUtils.random(100, true, true);
         Board.updateBoard(boardEntity.getId(), newBoardName)
@@ -42,18 +46,17 @@ public class BoardTestAPI extends BaseTestAPI  {
              .body(Board.boardBodyKeyName, equalTo(newBoardName));
     }
 
-    @Test(priority = 4, groups = {"HW"})
+    @Test(priority = 4)
     public void deleteBoard() {
         Board.deleteBoard(boardEntity.getId())
              .then()
              .spec(okResponse);
     }
 
-    @Test(priority = 5, groups = {"HW"})
+    @Test(priority = 5)
     public void makeSureBoardDeletion() {
         Board.getBoard(boardEntity.getId())
              .then()
              .statusCode(HttpStatus.SC_NOT_FOUND);
     }
-
 }
