@@ -2,7 +2,7 @@ package com.epam.tc.serviceobjects;
 
 import static io.restassured.RestAssured.given;
 
-import com.epam.tc.test.BaseTestAPI;
+import com.epam.tc.spec.Specification;
 import io.restassured.response.Response;
 
 public class Card {
@@ -26,7 +26,7 @@ public class Card {
 
     public static Response createCard(String listId, String cardName) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(CARDS_PATH)
             .queryParam(queryParamIdList, listId)
@@ -38,7 +38,7 @@ public class Card {
 
     public static Response updateCard(String cardId, String newCardName) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(CARD_ID)
             .pathParam(pathParamId, cardId)
@@ -50,7 +50,7 @@ public class Card {
 
     public static Response getCard(String cardId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(CARD_ID)
             .pathParam(pathParamId, cardId)
@@ -61,7 +61,7 @@ public class Card {
 
     public static Response deleteCard(String cardId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(CARD_ID)
             .pathParam(pathParamId, cardId)

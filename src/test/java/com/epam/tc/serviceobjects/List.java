@@ -2,7 +2,7 @@ package com.epam.tc.serviceobjects;
 
 import static io.restassured.RestAssured.given;
 
-import com.epam.tc.test.BaseTestAPI;
+import com.epam.tc.spec.Specification;
 import io.restassured.response.Response;
 
 public class List {
@@ -18,7 +18,7 @@ public class List {
 
     public static Response createList(String listName, String boardId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(LISTS_PATH)
             .queryParam(queryParamName, listName)

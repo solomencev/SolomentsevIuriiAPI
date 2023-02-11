@@ -1,9 +1,11 @@
 package com.epam.tc.test;
 
+import static com.epam.tc.spec.Specification.okResponse;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.CardEntity;
+import com.epam.tc.entities.LabelEntity;
 import com.epam.tc.entities.ListEntity;
 import com.epam.tc.serviceobjects.Board;
 import com.epam.tc.serviceobjects.Card;
@@ -16,9 +18,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-public class CardTestAPI extends BaseTestAPI  {
+public class CardTestAPI {
 
-    @BeforeClass
+    protected String boardName;
+    protected String listName;
+    protected String cardName;
+
+    BoardEntity boardEntity;
+    ListEntity listEntity;
+    CardEntity cardEntity;
+
+
+    @BeforeClass(alwaysRun = true)
     protected void createBoardWithList() {
         boardName = RandomStringUtils.random(50, true, true);
         listName = RandomStringUtils.random(10, true, true);
@@ -26,14 +37,14 @@ public class CardTestAPI extends BaseTestAPI  {
         listEntity = List.createList(listName, boardEntity.getId()).getBody().as(ListEntity.class);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     protected void deleteBoard() {
         Board.deleteBoard(boardEntity.getId())
              .then()
              .spec(okResponse);
     }
 
-    @Test(groups = {"HW"})
+    @Test()
     public void cardLifecycle() {
 
         /* add new card */

@@ -1,5 +1,7 @@
 package com.epam.tc.test;
 
+import static com.epam.tc.spec.Specification.okResponse;
+
 import com.epam.tc.entities.BoardEntity;
 import com.epam.tc.entities.LabelEntity;
 import com.epam.tc.serviceobjects.Board;
@@ -12,9 +14,20 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class LabelTestAPI  extends BaseTestAPI {
+public class LabelTestAPI {
 
-    @BeforeClass
+
+    protected String boardName;
+    protected String boardDescription;
+
+    protected String labelName;
+    protected String labelColor;
+
+
+    BoardEntity boardEntity;
+    LabelEntity labelEntity;
+
+    @BeforeClass(alwaysRun = true)
     protected void createBoardWithLabel() {
         boardName = RandomStringUtils.random(50, true, true);
         labelName = RandomStringUtils.random(10, true, true);
@@ -24,14 +37,14 @@ public class LabelTestAPI  extends BaseTestAPI {
 
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     protected void deleteBoard() {
         Board.deleteBoard(boardEntity.getId())
              .then()
              .spec(okResponse);
     }
 
-    @Test(groups = {"HW"})
+    @Test()
     public void labelLifecycle() {
 
         /* get label */

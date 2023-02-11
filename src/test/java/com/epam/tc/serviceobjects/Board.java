@@ -2,10 +2,10 @@ package com.epam.tc.serviceobjects;
 
 import static io.restassured.RestAssured.given;
 
-import com.epam.tc.test.BaseTestAPI;
+import com.epam.tc.spec.Specification;
 import io.restassured.response.Response;
 
-public class Board {
+public class Board extends Specification {
 
     /** Path. */
     private static final String BOARDS_PATH = "/1/boards";
@@ -27,7 +27,7 @@ public class Board {
 
     public static Response createNewBoard(String boardName, String boardDesciption) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .basePath(BOARDS_PATH)
             .when()
             .queryParam(pathParamName, boardName)
@@ -39,7 +39,7 @@ public class Board {
 
     public static Response createNewBoardForListFlow(String boardName) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .basePath(BOARDS_PATH)
             .when()
             .queryParam(pathParamName, boardName)
@@ -50,7 +50,7 @@ public class Board {
 
     public static Response getBoard(String boardId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(BOARD_ID)
             .pathParam(pathParamId, boardId)
@@ -61,7 +61,7 @@ public class Board {
 
     public static Response updateBoard(String boardId, String newBoardName) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(BOARD_ID)
             .pathParam(pathParamId, boardId)
@@ -73,7 +73,7 @@ public class Board {
 
     public static Response deleteBoard(String boardId) {
         return given()
-            .spec(BaseTestAPI.baseRequestSpecification)
+            .spec(Specification.baseRequestSpecification)
             .when()
             .basePath(BOARD_ID)
             .pathParam(pathParamId, boardId)
