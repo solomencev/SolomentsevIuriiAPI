@@ -19,9 +19,10 @@ target/
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-.idea/
+.idea/*
 target
 .allure/*
+
 
 ### Eclipse ###
 .apt_generated
